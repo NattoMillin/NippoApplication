@@ -1,0 +1,65 @@
+# docker-composeのバージョンを指定
+version: "3.9"
+
+# db(Postgres),app(Django)のコンテナを作成
+services:
+  db:
+    container_name: postgres-Nippo
+    image: postgres:13-bullseye
+    volumes:
+      - nippoAppsDBVolumes:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    # コンテナ内の環境変数を.envを使って設定
+    env_file:
+      - .env
+
+  frontend:
+    container_name: frontend
+    user: node:node
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    tty: true
+    volumes:
+      - ./frontend/application:/home/node/dev
+    ports:
+      - 3000:3000
+    # entrypoint: setVolumePermission.sh
+
+  backend:
+    # コンテナ名をappに設定
+    container_name: backend
+    # DjangoのDockerfileをビルドする
+    build:
+      # ビルドコンテキストはカレントディレクトリ
+      context: .
+      dockerfile: backend/Dockerfile
+      args:
+        - USERNAME=${USERNAME}
+        - GROUPNAME=${GROUPNAME}
+        - UID=${UID}
+        - GID=${GID}
+    tty: true
+    # ボリュームを指定
+    # ローカルのカレントディレクトリをコンテナの/codeにマウントする
+    # ローカルの/staticをコンテナの/staticにマウントする
+    volumes:
+      - ./backend/djangoprojects:/home/dev/backend
+    # ローカルの8000番ポートとコンテナの8000番ポートをつなぐ
+    ports:
+      - "8000:8000"
+    # シェルスクリプトを実行
+    # command: sh -c "/usr/local/bin/entrypoint.sh"
+    # コンテナ内の環境変数を.envを使って設定
+    env_file:
+      - .env
+    # 先にdbを起動してからappを起動する
+    depends_on:
+      - db
+
+volumes:
+  nippoAppsDBVolumes:
+
+networks:
+  default:
