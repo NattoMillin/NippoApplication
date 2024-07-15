@@ -1,11 +1,11 @@
-FROM python:3
+FROM python:3 as dev
 ENV PYTHONUNBUFFERED 1
 
 # 環境変数を指定
-ARG USERNAME
-ARG GROUPNAME
-ARG UID
-ARG GID
+ARG USERNAME=dev
+ARG GROUPNAME=dev
+ARG UID=1000
+ARG GID=1000
 
 # django-admin start appのpathが通っていないため、追加。
 ENV PATH $PATH:/home/dev/.local
@@ -27,3 +27,12 @@ RUN chown ${UID}:${GID} /home/${USERNAME} && \
     chmod 777 /home/${USERNAME}
     
 USER ${USERNAME}
+
+FROM dev as test
+
+COPY backend/djangoprojects .
+
+# RUN source venv/bin/activate
+RUN pip install -r requirements.txt
+CMD [ "python","manage.py", "runserver" ,"0.0.0.0:8000" ]
+

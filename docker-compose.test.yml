@@ -35,27 +35,17 @@ services:
       # ビルドコンテキストはカレントディレクトリ
       context: .
       dockerfile: backend/Dockerfile
-      target: dev
+      target: test
       args:
         - USERNAME=${USERNAME}
         - GROUPNAME=${GROUPNAME}
         - UID=${UID}
         - GID=${GID}
     tty: true
-    # ボリュームを指定
-    # ローカルのカレントディレクトリをコンテナの/codeにマウントする
-    # ローカルの/staticをコンテナの/staticにマウントする
-    volumes:
-      - ./backend/djangoprojects:/home/dev/backend
-    # ローカルの8000番ポートとコンテナの8000番ポートをつなぐ
     ports:
       - "8000:8000"
-    # シェルスクリプトを実行
-    # command: sh -c "/usr/local/bin/entrypoint.sh"
-    # コンテナ内の環境変数を.envを使って設定
     env_file:
       - .env
-    # 先にdbを起動してからappを起動する
     depends_on:
       - db
 
