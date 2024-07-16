@@ -16,6 +16,11 @@ class LoginView(TokenObtainPairView):
     def post(self, request: Request, *args, **kwargs) -> Response:
         response = super().post(request, *args, **kwargs)
 
+        try:
+            response.delete_cookie("access_token")
+        except Exception as e:
+            print(e)
+
         # access token set cookie
         access_token = response.data["access"]
         response.set_cookie(

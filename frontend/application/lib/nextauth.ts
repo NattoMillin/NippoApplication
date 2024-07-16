@@ -70,14 +70,16 @@ const authorizeUser = async (number: string, password: string) => {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ number, password }),
+    credentials: "include",
   });
 
   const user = await fetchAPI("/api/auth/users/me/", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `JWT ${session.access}`,
+      // Authorization: `JWT ${session.access}`,
     },
+    credentials: "include",
   });
 
   return {

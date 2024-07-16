@@ -32,6 +32,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",  # 追加
@@ -62,13 +63,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "Nippo.wsgi.application"
 
-CORS_ORIGIN_ALLOW_ALL = True
-# CORS_ALLOWED_ORIGINS = config("TRUSTED_ORIGINS").split(",")
 
-CORS_ORIGIN_WHITELIST = [
-    "http://localhost:3000",
-    "http://localhost:8000",
-]
+# 自身以外のオリジンのHTTPリクエスト内にクッキーを含めることを許可する
+CORS_ALLOW_CREDENTIALS = True
+# アクセスを許可したいURL（アクセス元）を追加
+CORS_ALLOWED_ORIGINS = config("TRUSTED_ORIGINS").split(",")
+# プリフライト(事前リクエスト)の設定
+# 30分だけ許可
+CORS_PREFLIGHT_MAX_AGE = 60 * 30
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
@@ -163,7 +165,7 @@ SIMPLE_JWT = {
     "AUTH_COOKIE_SECURE": True,  # restricts the transmission of the cookie to only occur over secure (HTTPS) connections.
     "AUTH_COOKIE_HTTP_ONLY": True,  # prevents client-side js from accessing the cookie
     "AUTH_COOKIE_PATH": "/",  # URL path where cookie will be sent
-    "AUTH_COOKIE_SAMESITE": "Lax",  # specifies whether the cookie should be sent in cross site requests
+    "AUTH_COOKIE_SAMESITE": "None",  # specifies whether the cookie should be sent in cross site requests
 }
 
 # Djoser設定

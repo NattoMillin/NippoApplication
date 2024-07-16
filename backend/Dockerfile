@@ -24,15 +24,15 @@ RUN pip install --upgrade --no-cache-dir pip
 
 # permission関係
 RUN chown ${UID}:${GID} /home/${USERNAME} && \
-    chmod 777 /home/${USERNAME}
+    chmod 777 /home/${USERNAME} && \
+    chmod +x /home/dev/.local
     
 USER ${USERNAME}
 
 FROM dev as test
 
 COPY backend/djangoprojects .
-
 # RUN source venv/bin/activate
 RUN pip install -r requirements.txt
-CMD [ "python","manage.py", "runserver" ,"0.0.0.0:8000" ]
+# CMD [ "python","manage.py", "runserver" ,"0.0.0.0:8000" ]
 
