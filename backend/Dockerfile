@@ -8,7 +8,7 @@ ARG UID=1000
 ARG GID=1000
 
 # django-admin start appのpathが通っていないため、追加。
-ENV PATH $PATH:/home/dev/.local
+# ENV PATH $PATH:/home/dev/.local
 
 RUN mkdir /home/${USERNAME} && \
     mkdir /home/${USERNAME}/backend
@@ -24,8 +24,7 @@ RUN pip install --upgrade --no-cache-dir pip
 
 # permission関係
 RUN chown ${UID}:${GID} /home/${USERNAME} && \
-    chmod 777 /home/${USERNAME} && \
-    chmod +x /home/dev/.local
+    chmod 777 /home/${USERNAME} 
     
 USER ${USERNAME}
 

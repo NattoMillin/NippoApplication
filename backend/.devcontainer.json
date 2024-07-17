@@ -1,6 +1,6 @@
 {
   "name": "Backends Container",
-  "dockerComposeFile": "../docker-compose.yml",
+  "dockerComposeFile": "../docker-compose.dev.yml",
   "workspaceFolder": "/home/dev/backend",
   "service": "backend",
   "runServices": ["backend", "db"],
