@@ -1,19 +1,24 @@
-from rest_framework_simplejwt.authentication import JWTAuthentication
-from rest_framework.response import Response
 from django.conf import settings
+from django.middleware.csrf import CsrfViewMiddleware
+from rest_framework import exceptions
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
-class CookieHandlerJWTAuthentication(JWTAuthentication):
+class CustomJWTAuthentication(JWTAuthentication):
+    """Custom authentication class"""
+
     def authenticate(self, request):
-        # Cookieヘッダーからaccess_tokenを取得
-        access_token = request.COOKIES.get('access_token')
-        if not access_token:
-            Response({"message": 'no Token'})
+        header = self.get_header(request)
+        
+        if header is None:
+            access_token = (
+                request.COOKIES.get("access_token") or None
+            )
+            
         else:
-            Response(access_token)
+            access_token = self.get_raw_token(header)
+        if access_token is None:
+            return None
 
-        if access_token:
-            request.META['HTTP_AUTHORIZATION'] = '{header_type} {access_token}'.format(
-                header_type=settings.SIMPLE_JWT['AUTH_HEADER_TYPES'][0], access_token=access_token)
-
-        return super().authenticate(request)
+        validated_token = self.get_validated_token(access_token)
+        return self.get_user(validated_token), validated_token

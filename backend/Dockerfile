@@ -8,7 +8,7 @@ ARG UID=1000
 ARG GID=1000
 
 # django-admin start appのpathが通っていないため、追加。
-# ENV PATH $PATH:/home/dev/.local
+
 
 RUN mkdir /home/${USERNAME} && \
     mkdir /home/${USERNAME}/backend
@@ -26,6 +26,9 @@ RUN pip install --upgrade --no-cache-dir pip
 RUN chown ${UID}:${GID} /home/${USERNAME} && \
     chmod 777 /home/${USERNAME} 
     
+ENV PYTHONUSERBASE=/home/$USERNAME/.local
+ENV PATH=$PYTHONUSERBASE/bin:$PATH
+
 USER ${USERNAME}
 
 FROM dev as test
@@ -33,5 +36,6 @@ FROM dev as test
 COPY backend/djangoprojects .
 # RUN source venv/bin/activate
 RUN pip install -r requirements.txt
-# CMD [ "python","manage.py", "runserver" ,"0.0.0.0:8000" ]
 
+
+CMD [ "gunicorn","--bind", ":8000", "Myapp.wsgi:application" ]

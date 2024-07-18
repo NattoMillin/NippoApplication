@@ -1,10 +1,15 @@
-from django.utils.deprecation import MiddlewareMixin
-from django.conf import settings
 
-class JWTAuthMiddleware(MiddlewareMixin):
-    def process_request(self, request):
-        token = request.COOKIES.get('access_token')
-        
-        print("token:" + token)
-        if token:
-            request.META['HTTP_AUTHORIZATION'] = f'JWT {token}'
+
+
+class SameSiteMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        response = self.get_response(request)
+        from Myapp import settings
+
+        for key in response.cookies.keys():
+            response.cookies[key]['samesite'] = 'Lax' if settings.DEBUG else 'None'
+            response.cookies[key]['secure'] = not settings.DEBUG
+        return response
