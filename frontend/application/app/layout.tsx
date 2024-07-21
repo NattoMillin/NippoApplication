@@ -2,12 +2,15 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/auth/Navigation";
+import ToastProvider from "@/components/providers/ToastProvider";
+import AuthProvider from "@/components/providers/AuthProvider";
+import { getAuthSession } from "@/lib/nextauth";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Next.js+DRF入門",
-  description: "Next.js+DRF入門",
+  title: "日報アプリ",
+  description: "日報アプリ",
 };
 
 interface RootLayoutProps {
@@ -15,31 +18,36 @@ interface RootLayoutProps {
 }
 
 const RootLayout = async ({ children }: RootLayoutProps) => {
+  const user = await getAuthSession();
   return (
     <html lang="ja">
       <body className={inter.className}>
-        <div className="flex min-h-screen flex-col">
-          <Navigation />
+        <AuthProvider>
+          <div className="flex min-h-screen flex-col">
+            {/* <Navigation /> */}
+            <Navigation user={user} />
+            <ToastProvider />
 
-          <main className="container mx-auto max-w-screen-md flex-1 px-2">
-            {children}
-          </main>
+            <main className="container mx-auto max-w-screen-md flex-1 px-2">
+              {children}
+            </main>
 
-          {/* フッター */}
-          <footer className="py-5">
-            <div className="text-center text-sm">
-              Copyright © All rights reserved |{" "}
-              <a
-                href="https://www.youtube.com/@fullstackchannel"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline"
-              >
-                FullStackChannel
-              </a>
-            </div>
-          </footer>
-        </div>
+            {/* フッター */}
+            <footer className="py-5">
+              <div className="text-center text-sm">
+                Copyright © All rights reserved |{" "}
+                <a
+                  href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline"
+                >
+                  FullStackChannel
+                </a>
+              </div>
+            </footer>
+          </div>
+        </AuthProvider>
       </body>
     </html>
   );

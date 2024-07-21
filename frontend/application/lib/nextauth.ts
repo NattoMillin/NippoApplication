@@ -5,16 +5,15 @@ import type { JWT } from "next-auth/jwt";
 // NextAuthとJWTの型を拡張してアクセストークンとリフレッシュトークンを含める
 declare module "next-auth" {
   interface Session {
-    accessToken?: string;
+    uid?: string;
   }
 }
 
-declare module "next-auth/jwt" {
-  interface JWT {
-    accessToken?: string;
-    refreshToken?: string;
-  }
-}
+// declare module "next-auth/jwt" {
+//   interface JWT {
+//     uid?: string;
+//   }
+// }
 
 // ユーザー型の定義
 export interface UserType {
@@ -46,23 +45,23 @@ const verifyAccessToken = async (token: JWT) => {
   return fetchAPI("/api/auth/jwt/verify/", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ token: token.accessToken }),
+    //  bodyは今回なしで行けるはず。Cookieで完全に管理するため。
   }).then((res) => res.ok);
 };
 
-// アクセストークンの更新
-const refreshAccessToken = async (token: JWT) => {
-  const { access } = await fetchAPI("/api/auth/jwt/refresh/", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ refresh: token.refreshToken }),
-  });
+// アクセストークンの更新　⇒　今回はリフレッシュを行わない。
+// const refreshAccessToken = async (token: JWT) => {
+//   const { access } = await fetchAPI("/api/auth/jwt/refresh/", {
+//     method: "POST",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify({ refresh: token.refreshToken }),
+//   });
 
-  return {
-    accessToken: access,
-    refreshToken: token.refreshToken,
-  };
-};
+//   return {
+//     accessToken: access,
+//     refreshToken: token.refreshToken,
+//   };
+// };
 
 // ユーザー情報取得
 const authorizeUser = async (number: string, password: string) => {
@@ -70,16 +69,14 @@ const authorizeUser = async (number: string, password: string) => {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ number, password }),
-    credentials: "include",
   });
 
   const user = await fetchAPI("/api/auth/users/me/", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      // Authorization: `JWT ${session.access}`,
+      //   Authorization: `JWT ${session.access}`,
     },
-    credentials: "include",
   });
 
   return {
@@ -97,7 +94,7 @@ export const authOptions: NextAuthOptions = {
       name: "credentials",
       credentials: {
         // メールアドレスとパスワード
-        number: { label: "従業員番号", type: "text" },
+        number: { label: "number", type: "text" },
         password: { label: "password", type: "password" },
       },
       async authorize(credentials) {
@@ -120,8 +117,7 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         return {
           ...token,
-          accessToken: user.access,
-          refreshToken: user.refresh,
+          accesstoken: user.accesstoken,
         };
       }
 
@@ -130,12 +126,11 @@ export const authOptions: NextAuthOptions = {
         return token;
       }
 
-      // アクセストークンの更新
-      return refreshAccessToken(token);
+      return {};
     },
     async session({ session, token }: { session: any; token: JWT }) {
-      session.accessToken = token.accessToken;
-
+      session.accesstoken = token.accesstoken;
+      console.log(token.accesstoken);
       return session;
     },
   },
@@ -145,7 +140,7 @@ export const authOptions: NextAuthOptions = {
 export const getAuthSession = async () => {
   const session = await getServerSession(authOptions);
 
-  if (!session || !session.accessToken) {
+  if (!session || !session.uid) {
     return null;
   }
 
@@ -154,13 +149,13 @@ export const getAuthSession = async () => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `JWT ${session.accessToken}`,
+      //   Authorization: `JWT ${session.accessToken}`,
     },
   });
 
   const userData: UserType = {
     ...user,
-    accessToken: session.accessToken,
+    // accessToken: session.accessToken,
   };
 
   return userData;
