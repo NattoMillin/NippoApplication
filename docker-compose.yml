@@ -14,19 +14,7 @@ services:
     env_file:
       - .env
     networks:
-      - backend_network
-
-  nginx-front:
-    container_name: nginx_frontend
-    build:
-      context: ./frontend/nginx-front/.
-      dockerfile: Dockerfile.dev
-    ports:
-      - "80:80"
-    depends_on:
-      - frontend
-    networks:
-      - frontend_network
+      - testnetwork
 
   frontend:
     container_name: frontend
@@ -40,22 +28,8 @@ services:
     ports:
       - 3000:3000
     networks:
-      - frontend_network
+      - testnetwork
     entrypoint: npm run dev
-
-  nginx:
-    container_name: nginx_back
-    build:
-      context: .
-      dockerfile: ./backend/nginx/Dockerfile.dev
-    volumes:
-      - static_volume:/code/staticfiles # <-- bind the static volume
-    ports:
-      - "8080:80"
-    depends_on:
-      - backend
-    networks:
-      - backend_network
 
   backend:
     # コンテナ名をappに設定
@@ -90,7 +64,33 @@ services:
     depends_on:
       - db
     networks:
-      - backend_network
+      - testnetwork
+
+  nginx-front:
+    container_name: nginx_frontend
+    build:
+      context: ./frontend/nginx-front/.
+      dockerfile: Dockerfile.dev
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+    networks:
+      - testnetwork
+
+  nginx:
+    container_name: nginx_back
+    build:
+      context: .
+      dockerfile: ./backend/nginx/Dockerfile.dev
+    volumes:
+      - static_volume:/code/staticfiles # <-- bind the static volume
+    ports:
+      - "81:80"
+    depends_on:
+      - backend
+    networks:
+      - testnetwork
 
 volumes:
   nippoAppsDBVolumes:
@@ -99,3 +99,4 @@ volumes:
 networks:
   frontend_network:
   backend_network:
+  testnetwork:
