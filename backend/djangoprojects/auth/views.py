@@ -22,6 +22,8 @@ User = get_user_model()
 class TokenObtainView(jwt_views.TokenObtainPairView):
     # token作成(LoginView)
     def post(self, request, *args, **kwargs):
+        
+        print("TokenObtainView")
         serializer = self.get_serializer(data=request.data)
         try:
             serializer.is_valid(raise_exception=True)
@@ -39,7 +41,7 @@ class TokenObtainView(jwt_views.TokenObtainPairView):
         res.set_cookie(
             "access_token",
             serializer.validated_data["access"],
-            httponly=True,
+            # httponly=True,
             # secure=True,
             # samesite="None",
             max_age=settings.SIMPLE_JWT['ACCESS_TOKEN_LIFETIME'].total_seconds(),
@@ -47,7 +49,7 @@ class TokenObtainView(jwt_views.TokenObtainPairView):
         res.set_cookie(
             "refresh_token",
             serializer.validated_data["refresh"],
-            httponly=True,
+            # httponly=True,
             # secure=True,
             # samesite="None",
             max_age=settings.SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'].total_seconds(),
@@ -118,6 +120,8 @@ class UserAPIView(views.APIView):
             return "user does not exists"
 
     def get(self, request, format=None):
+
+        print("UserAPIView")
         JWT = request.COOKIES.get("access_token")
         if not JWT:
             return Response({"error": "No token"}, status=status.HTTP_400_BAD_REQUEST)

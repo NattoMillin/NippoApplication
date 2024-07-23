@@ -11,7 +11,7 @@ SECRET_KEY = config("SECRET_KEY")
 
 DEBUG = config("DEBUG")
 
-ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="localhost,127.0.0.1,nginx").split(",")
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="localhost,127.0.0.1,nginx,172.22.0.5").split(",")
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -33,7 +33,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     # "Myapp.middleware.JWTAuthMiddleware",
     "corsheaders.middleware.CorsMiddleware",
-    "Myapp.middleware.SameSiteMiddleware",
+    # "Myapp.middleware.SameSiteMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -68,7 +68,10 @@ WSGI_APPLICATION = "Myapp.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOWED_ORIGINS = config("TRUSTED_ORIGINS").split(",")
+# CORS_ALLOWED_ORIGINS = config("TRUSTED_ORIGINS").split(",")
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000","http://127.0.0.1:3000","http://172.22.0.5:80","https://localhost:3000","https://127.0.0.1:3000","https://172.22.0.5:80","https://nginx:80","http://nginx:80"
+]
 # ↓ 追加
 default_dburl = {
     "ENGINE": "django.db.backends.postgresql",
@@ -162,7 +165,7 @@ SIMPLE_JWT = {
 AUTH_USER_MODEL = "user.UserAccount"
 # CSRFの設定
 # これがないと403エラーを返してしまう
-CSRF_TRUSTED_ORIGINS = ["http://localhost", "http://127.0.0.1"]
+CSRF_TRUSTED_ORIGINS = ["http://localhost", "http://127.0.0.1","http://172.22.0.5"]
 
 # DJOSER = {
 #     "USER_ID_FIELD": "number",

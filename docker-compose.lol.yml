@@ -1,0 +1,102 @@
+# docker-composeのバージョンを指定
+version: "3.9"
+
+# db(Postgres),app(Django)のコンテナを作成
+services:
+  db:
+    container_name: postgres-Nippo
+    image: postgres:13-bullseye
+    volumes:
+      - nippoAppsDBVolumes:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    # コンテナ内の環境変数を.envを使って設定
+    env_file:
+      - .env
+    networks:
+      - testnetwork
+
+  frontend:
+    container_name: frontend
+    user: node:node
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    tty: true
+    volumes:
+      - ./frontend/application:/home/node/dev
+    ports:
+      - 3000:3000
+    networks:
+      - testnetwork
+    # entrypoint: npm run dev
+
+  backend:
+    # コンテナ名をappに設定
+    container_name: backend
+    # DjangoのDockerfileをビルドする
+    build:
+      # ビルドコンテキストはカレントディレクトリ
+      context: .
+      dockerfile: backend/Dockerfile
+      target: dev
+      args:
+        - USERNAME=${USERNAME}
+        - GROUPNAME=${GROUPNAME}
+        - UID=${UID}
+        - GID=${GID}
+    tty: true
+    # ボリュームを指定
+    # ローカルのカレントディレクトリをコンテナの/codeにマウントする
+    # ローカルの/staticをコンテナの/staticにマウントする
+    volumes:
+      - ./backend/djangoprojects:/home/dev/backend
+      - static_volume:/home/dev/backend/static
+    # ローカルの8000番ポートとコンテナの8000番ポートをつなぐ
+    ports:
+      - "8000:8000"
+    # command: gunicorn --bind :8000 Nippo.wsgi:application
+
+    # コンテナ内の環境変数を.envを使って設定
+    env_file:
+      - .env
+    # 先にdbを起動してからappを起動する
+    depends_on:
+      - db
+    networks:
+      - testnetwork
+
+  nginx-front:
+    container_name: nginx_frontend
+    build:
+      context: ./frontend/nginx-front/.
+      dockerfile: Dockerfile.dev
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+    networks:
+      - testnetwork
+
+  nginx:
+    container_name: nginx_back
+    build:
+      context: .
+      dockerfile: ./backend/nginx/Dockerfile.dev
+    volumes:
+      - static_volume:/code/staticfiles # <-- bind the static volume
+    ports:
+      - "81:80"
+    depends_on:
+      - backend
+    networks:
+      - testnetwork
+
+volumes:
+  nippoAppsDBVolumes:
+  static_volume:
+
+networks:
+  frontend_network:
+  backend_network:
+  testnetwork:

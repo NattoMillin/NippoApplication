@@ -1,9 +1,13 @@
 {
   "name": "Backends Container",
-  "dockerComposeFile": "../docker-compose.dev.yml",
+  "dockerComposeFile": "../docker-compose.lol.yml",
   "workspaceFolder": "/home/dev/backend",
   "service": "backend",
-  "runServices": ["backend", "db"],
+  "runServices": [
+    "backend",
+    "db",
+    "nginx"
+  ],
   // リモート先のVS Codeにインストールする拡張機能
   "customizations": {
     "vscode": {

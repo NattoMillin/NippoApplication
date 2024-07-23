@@ -1,10 +1,11 @@
 {
   "name": "NextJS Container",
-  "dockerComposeFile": "../docker-compose.dev.yml",
+  "dockerComposeFile": "../docker-compose.lol.yml",
   "workspaceFolder": "/home/node/dev",
   "service": "frontend",
   "runServices": [
-    "frontend"
+    "frontend",
+    "nginx-front"
   ],
   // リモート先のVS Codeにインストールする拡張機能
   "customizations": {

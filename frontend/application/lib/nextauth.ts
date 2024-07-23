@@ -45,23 +45,10 @@ const verifyAccessToken = async (token: JWT) => {
   return fetchAPI("/api/auth/jwt/verify/", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
+    credentials: "include", // include cookies
     //  bodyは今回なしで行けるはず。Cookieで完全に管理するため。
   }).then((res) => res.ok);
 };
-
-// アクセストークンの更新　⇒　今回はリフレッシュを行わない。
-// const refreshAccessToken = async (token: JWT) => {
-//   const { access } = await fetchAPI("/api/auth/jwt/refresh/", {
-//     method: "POST",
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify({ refresh: token.refreshToken }),
-//   });
-
-//   return {
-//     accessToken: access,
-//     refreshToken: token.refreshToken,
-//   };
-// };
 
 // ユーザー情報取得
 const authorizeUser = async (number: string, password: string) => {
@@ -70,13 +57,13 @@ const authorizeUser = async (number: string, password: string) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ number, password }),
   });
-
   const user = await fetchAPI("/api/auth/users/me/", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
       //   Authorization: `JWT ${session.access}`,
     },
+    credentials: "include", // include cookies
   });
 
   return {
@@ -112,37 +99,48 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt",
   },
   secret: process.env.NEXTAUTH_SECRET,
-  callbacks: {
-    async jwt({ token, user }: { token: JWT; user: any }) {
-      if (user) {
-        return {
-          ...token,
-          accesstoken: user.accesstoken,
-        };
-      }
+  // callbacks: {
+  //   async jwt({ token, user }: { token: JWT; user: any }) {
+  //     if (user) {
+  //       return {
+  //         ...token,
+  //         accesstoken: user.accesstoken,
+  //       };
+  //     }
 
-      // アクセストークンの検証
-      if (await verifyAccessToken(token)) {
-        return token;
-      }
+  //     // アクセストークンの検証
+  //     if (await verifyAccessToken(token)) {
+  //       return token;
+  //     }
 
-      return {};
-    },
-    async session({ session, token }: { session: any; token: JWT }) {
-      session.accesstoken = token.accesstoken;
-      console.log(token.accesstoken);
-      return session;
-    },
-  },
+  //     return {};
+  //   },
+  //   async session({ session, token }: { session: any; token: JWT }) {
+  //     session.accesstoken = token.accesstoken;
+  //     console.log(token.accesstoken);
+  //     return session;
+  //   },
+  // },
 };
 
 // 認証情報取得
 export const getAuthSession = async () => {
   const session = await getServerSession(authOptions);
 
-  if (!session || !session.uid) {
+  if (!session) {
     return null;
   }
+
+  const verify = await fetchAPI("/api/auth/jwt/verify/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      //   Authorization: `JWT ${session.accessToken}`,
+    },
+    credentials: "include", // include cookies
+  });
+
+  console.log(verify);
 
   // ユーザー情報を取得
   const user = await fetchAPI("/api/auth/users/me/", {
@@ -151,12 +149,15 @@ export const getAuthSession = async () => {
       "Content-Type": "application/json",
       //   Authorization: `JWT ${session.accessToken}`,
     },
+    credentials: "include", // include cookies
   });
 
-  const userData: UserType = {
+  const userData = {
     ...user,
     // accessToken: session.accessToken,
   };
+
+  console.log("userData(getAuthSession):" + userData);
 
   return userData;
 };
