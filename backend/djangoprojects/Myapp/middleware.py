@@ -14,10 +14,6 @@ class SameSiteMiddleware:
             # response.cookies[key]['samesite'] = 'Lax' if settings.DEBUG else 'None'
             response.cookies[key]['samesite'] = 'None'
             response.cookies[key]['secure'] = not settings.DEBUG
-<<<<<<< HEAD
-            
-        return response
-=======
         return response
 
 
@@ -38,4 +34,3 @@ class LogRequestMiddleware:
         logger.info("Request Headers: %s", dict(request.headers))
         if request.body:
             logger.info("Request Body: %s", request.body.decode('utf-8'))
->>>>>>> 83f340f (会社PC)

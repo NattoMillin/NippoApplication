@@ -33,12 +33,8 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     # "Myapp.middleware.JWTAuthMiddleware",
     "corsheaders.middleware.CorsMiddleware",
-<<<<<<< HEAD
-    # "Myapp.middleware.SameSiteMiddleware",
-=======
     "Myapp.middleware.SameSiteMiddleware",
     "Myapp.middleware.LogRequestMiddleware",
->>>>>>> 83f340f (会社PC)
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
