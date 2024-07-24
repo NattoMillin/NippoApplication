@@ -211,6 +211,7 @@ export const updateUser = async ({ name }: UpdateUserProps) => {
         "Content-Type": "application/json",
       },
       body,
+      credentials: "include",
     });
 
     // APIレスポンスが正常でない場合、失敗とnullを返す
@@ -267,6 +268,7 @@ export const updatePassword = async ({
           "Content-Type": "application/json",
         },
         body,
+        credentials: "include",
       }
     );
 

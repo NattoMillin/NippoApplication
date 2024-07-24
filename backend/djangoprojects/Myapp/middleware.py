@@ -14,6 +14,8 @@ class SameSiteMiddleware:
             # response.cookies[key]['samesite'] = 'Lax' if settings.DEBUG else 'None'
             response.cookies[key]['samesite'] = 'None'
             response.cookies[key]['secure'] = not settings.DEBUG
+
+        
         return response
 
 
@@ -28,7 +30,7 @@ class LogRequestMiddleware:
         response = self.get_response(request)
         return response
     # test
-    
+
     def log_request(self, request):
         logger.info("Request Method: %s", request.method)
         logger.info("Request Path: %s", request.get_full_path())
