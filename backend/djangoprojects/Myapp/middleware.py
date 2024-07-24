@@ -27,7 +27,8 @@ class LogRequestMiddleware:
         self.log_request(request)
         response = self.get_response(request)
         return response
-
+    # test
+    
     def log_request(self, request):
         logger.info("Request Method: %s", request.method)
         logger.info("Request Path: %s", request.get_full_path())
