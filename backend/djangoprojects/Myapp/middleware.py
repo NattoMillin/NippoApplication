@@ -28,6 +28,8 @@ class LogRequestMiddleware:
         response = self.get_response(request)
         return response
     # test
+    
+    # test
 
     def log_request(self, request):
         logger.info("Request Method: %s", request.method)
