@@ -6,6 +6,7 @@ import type { JWT } from "next-auth/jwt";
 declare module "next-auth" {
   interface Session {
     uid?: string;
+    accessToken?: string;
   }
 }
 
@@ -61,7 +62,7 @@ const authorizeUser = async (number: string, password: string) => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      //   Authorization: `JWT ${session.access}`,
+      Authorization: `JWT ${session.access}`,
     },
     credentials: "include", // include cookies
   });
@@ -147,14 +148,14 @@ export const getAuthSession = async () => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      //   Authorization: `JWT ${session.accessToken}`,
+      Authorization: `JWT ${session.accessToken}`,
     },
     credentials: "include", // include cookies
   });
 
   const userData = {
     ...user,
-    // accessToken: session.accessToken,
+    accessToken: session.accessToken,
   };
 
   console.log("userData(getAuthSession):" + userData);

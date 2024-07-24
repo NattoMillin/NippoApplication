@@ -55,14 +55,14 @@ const Login = () => {
       .then((result) => {
         if (result?.error) {
           // エラーがある場合、エラーメッセージを表示
-          toast.error("ログインに失敗しました");
+          toast.error("なぜかログインに失敗しました");
         } else {
           // トップページにリダイレクト
           window.location.href = "/";
         }
       })
       .catch((error) => {
-        toast.error("ログインに失敗しました");
+        toast.error("エラーでログインに失敗しました");
       })
       .finally(() => {
         setIsLoading(false);

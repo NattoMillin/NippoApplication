@@ -50,6 +50,9 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = "number"
     REQUIRED_FIELDS = []
 
+    def get_short_name(self):
+        return self.name  # first_name を返す例
+
     class Meta:
         verbose_name = "ユーザーアカウント"
         verbose_name_plural = "ユーザーアカウント"

@@ -35,7 +35,7 @@ FROM dev as test
 
 COPY backend/djangoprojects .
 # RUN source venv/bin/activate
-RUN pip install -r requirements.txt
+RUN pip install --retries 5 --upgrade --no-cache-dir -r requirements.txt
 
 
 CMD [ "gunicorn","--bind", ":8000", "Myapp.wsgi:application" ]

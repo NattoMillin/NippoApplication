@@ -19,6 +19,8 @@ export const temporarrySignup = async ({
       re_password: rePassword,
     });
 
+    console.log(body);
+
     // アカウント仮登録を送信
     const apiRes = await fetch(`${process.env.API_URL}/api/auth/users/`, {
       method: "POST",

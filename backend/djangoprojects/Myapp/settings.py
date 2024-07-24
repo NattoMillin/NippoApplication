@@ -33,7 +33,12 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     # "Myapp.middleware.JWTAuthMiddleware",
     "corsheaders.middleware.CorsMiddleware",
+<<<<<<< HEAD
     # "Myapp.middleware.SameSiteMiddleware",
+=======
+    "Myapp.middleware.SameSiteMiddleware",
+    "Myapp.middleware.LogRequestMiddleware",
+>>>>>>> 83f340f (会社PC)
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -185,4 +190,30 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+}
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'debug.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'your_app': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+        },
+    },
 }

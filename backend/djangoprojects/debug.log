@@ -1,0 +1,556 @@
+(0.023) SELECT 1 AS "a" FROM "user_useraccount" WHERE "user_useraccount"."number" = '000080' LIMIT 1; args=(1, '000080'); alias=default
+Bad Request: /api/auth/users/
+(0.011) SELECT "user_useraccount"."id", "user_useraccount"."password", "user_useraccount"."last_login", "user_useraccount"."is_superuser", "user_useraccount"."uid", "user_useraccount"."number", "user_useraccount"."name", "user_useraccount"."updated_at", "user_useraccount"."created_at", "user_useraccount"."is_active", "user_useraccount"."is_manager", "user_useraccount"."is_staff" FROM "user_useraccount" WHERE "user_useraccount"."number" = '000111' LIMIT 21; args=('000111',); alias=default
+(0.144) INSERT INTO "token_blacklist_outstandingtoken" ("user_id", "jti", "token", "created_at", "expires_at") VALUES (37, '129a55d205cc4212b267095f7d275c04', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyMTgwMzM0NCwiaWF0IjoxNzIxNzE2OTQ0LCJqdGkiOiIxMjlhNTVkMjA1Y2M0MjEyYjI2NzA5NWY3ZDI3NWMwNCIsInVzZXJfaWQiOiIwMDAxMTEifQ.He2N-mVRZjSLYqHPyNBkA78Lo8sRVVW1qD4LUoUJ45g', '2024-07-23T06:42:24.259246+00:00'::timestamptz, '2024-07-24T06:42:24+00:00'::timestamptz) RETURNING "token_blacklist_outstandingtoken"."id"; args=(37, '129a55d205cc4212b267095f7d275c04', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyMTgwMzM0NCwiaWF0IjoxNzIxNzE2OTQ0LCJqdGkiOiIxMjlhNTVkMjA1Y2M0MjEyYjI2NzA5NWY3ZDI3NWMwNCIsInVzZXJfaWQiOiIwMDAxMTEifQ.He2N-mVRZjSLYqHPyNBkA78Lo8sRVVW1qD4LUoUJ45g', datetime.datetime(2024, 7, 23, 6, 42, 24, 259246, tzinfo=datetime.timezone.utc), datetime.datetime(2024, 7, 24, 6, 42, 24, tzinfo=datetime.timezone.utc)); alias=default
+Unauthorized: /api/auth/users/me/
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dev/.local/lib/python3.12/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dev/.local/lib/python3.12/site-packages/django/core/handlers/base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dev/.local/lib/python3.12/site-packages/django/urls/resolvers.py", line 722, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <module 'auth.urls' from '/home/dev/backend/auth/urls.py'> (None:None) 'api/auth/'>], [<URLResolver <module 'djoser.urls' from '/home/dev/.local/lib/python3.12/site-packages/djoser/urls/__init__.py'> (None:None) 'api/auth/'>], [<URLResolver <module 'user.urls' from '/home/dev/backend/user/urls.py'> (None:None) 'api/'>], [<URLResolver <URLPattern list> (admin:admin) 'admin/'>]], 'path': 'admin'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 875, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 885, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <module 'auth.urls' from '/home/dev/backend/auth/urls.py'> (None:None) 'api/auth/'>
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dev/.local/lib/python3.12/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dev/.local/lib/python3.12/site-packages/django/core/handlers/base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dev/.local/lib/python3.12/site-packages/django/urls/resolvers.py", line 722, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <module 'auth.urls' from '/home/dev/backend/auth/urls.py'> (None:None) 'api/auth/'>], [<URLResolver <module 'djoser.urls' from '/home/dev/.local/lib/python3.12/site-packages/djoser/urls/__init__.py'> (None:None) 'api/auth/'>], [<URLResolver <module 'user.urls' from '/home/dev/backend/user/urls.py'> (None:None) 'api/'>], [<URLResolver <URLPattern list> (admin:admin) 'admin/'>]], 'path': 'admin'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 875, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 885, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <module 'djoser.urls' from '/home/dev/.local/lib/python3.12/site-packages/djoser/urls/__init__.py'> (None:None) 'api/auth/'>
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dev/.local/lib/python3.12/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dev/.local/lib/python3.12/site-packages/django/core/handlers/base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dev/.local/lib/python3.12/site-packages/django/urls/resolvers.py", line 722, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <module 'auth.urls' from '/home/dev/backend/auth/urls.py'> (None:None) 'api/auth/'>], [<URLResolver <module 'djoser.urls' from '/home/dev/.local/lib/python3.12/site-packages/djoser/urls/__init__.py'> (None:None) 'api/auth/'>], [<URLResolver <module 'user.urls' from '/home/dev/backend/user/urls.py'> (None:None) 'api/'>], [<URLResolver <URLPattern list> (admin:admin) 'admin/'>]], 'path': 'admin'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 875, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 885, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <module 'user.urls' from '/home/dev/backend/user/urls.py'> (None:None) 'api/'>
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dev/.local/lib/python3.12/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dev/.local/lib/python3.12/site-packages/django/core/handlers/base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dev/.local/lib/python3.12/site-packages/django/urls/resolvers.py", line 722, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <module 'auth.urls' from '/home/dev/backend/auth/urls.py'> (None:None) 'api/auth/'>], [<URLResolver <module 'djoser.urls' from '/home/dev/.local/lib/python3.12/site-packages/djoser/urls/__init__.py'> (None:None) 'api/auth/'>], [<URLResolver <module 'user.urls' from '/home/dev/backend/user/urls.py'> (None:None) 'api/'>], [<URLResolver <URLPattern list> (admin:admin) 'admin/'>]], 'path': 'admin'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 875, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 885, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+(0.007) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2024-07-23T06:43:14.788436+00:00'::timestamptz AND "django_session"."session_key" = 'ze5owavogzrvdjvdq475mzojsf4r9pex') LIMIT 21; args=(datetime.datetime(2024, 7, 23, 6, 43, 14, 788436, tzinfo=datetime.timezone.utc), 'ze5owavogzrvdjvdq475mzojsf4r9pex'); alias=default
+(0.001) SELECT "user_useraccount"."id", "user_useraccount"."password", "user_useraccount"."last_login", "user_useraccount"."is_superuser", "user_useraccount"."uid", "user_useraccount"."number", "user_useraccount"."name", "user_useraccount"."updated_at", "user_useraccount"."created_at", "user_useraccount"."is_active", "user_useraccount"."is_manager", "user_useraccount"."is_staff" FROM "user_useraccount" WHERE "user_useraccount"."id" = 2 LIMIT 21; args=(2,); alias=default
+Exception while resolving variable 'get_short_name' in template 'admin/index.html'.
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 875, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+  File "/home/dev/.local/lib/python3.12/site-packages/django/utils/functional.py", line 253, in inner
+    return func(_wrapped, *args)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'UserAccount' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 885, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dev/.local/lib/python3.12/site-packages/django/utils/functional.py", line 253, in inner
+    return func(_wrapped, *args)
+           ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'UserAccount' object has no attribute 'get_short_name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'get_short_name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [get_short_name] in <SimpleLazyObject: <UserAccount: >>
+(0.015) SELECT "django_admin_log"."id", "django_admin_log"."action_time", "django_admin_log"."user_id", "django_admin_log"."content_type_id", "django_admin_log"."object_id", "django_admin_log"."object_repr", "django_admin_log"."action_flag", "django_admin_log"."change_message", "user_useraccount"."id", "user_useraccount"."password", "user_useraccount"."last_login", "user_useraccount"."is_superuser", "user_useraccount"."uid", "user_useraccount"."number", "user_useraccount"."name", "user_useraccount"."updated_at", "user_useraccount"."created_at", "user_useraccount"."is_active", "user_useraccount"."is_manager", "user_useraccount"."is_staff", "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_admin_log" INNER JOIN "user_useraccount" ON ("django_admin_log"."user_id" = "user_useraccount"."id") LEFT OUTER JOIN "django_content_type" ON ("django_admin_log"."content_type_id" = "django_content_type"."id") WHERE "django_admin_log"."user_id" = 2 ORDER BY "django_admin_log"."action_time" DESC LIMIT 10; args=(2,); alias=default
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dev/.local/lib/python3.12/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dev/.local/lib/python3.12/site-packages/django/core/handlers/base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dev/.local/lib/python3.12/site-packages/django/urls/resolvers.py", line 722, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <module 'auth.urls' from '/home/dev/backend/auth/urls.py'> (None:None) 'api/auth/'>], [<URLResolver <module 'djoser.urls' from '/home/dev/.local/lib/python3.12/site-packages/djoser/urls/__init__.py'> (None:None) 'api/auth/'>], [<URLResolver <module 'user.urls' from '/home/dev/backend/user/urls.py'> (None:None) 'api/'>], [<URLResolver <URLPattern list> (admin:admin) 'admin/'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 875, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 885, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <module 'auth.urls' from '/home/dev/backend/auth/urls.py'> (None:None) 'api/auth/'>
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dev/.local/lib/python3.12/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dev/.local/lib/python3.12/site-packages/django/core/handlers/base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dev/.local/lib/python3.12/site-packages/django/urls/resolvers.py", line 722, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <module 'auth.urls' from '/home/dev/backend/auth/urls.py'> (None:None) 'api/auth/'>], [<URLResolver <module 'djoser.urls' from '/home/dev/.local/lib/python3.12/site-packages/djoser/urls/__init__.py'> (None:None) 'api/auth/'>], [<URLResolver <module 'user.urls' from '/home/dev/backend/user/urls.py'> (None:None) 'api/'>], [<URLResolver <URLPattern list> (admin:admin) 'admin/'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 875, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 885, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <module 'djoser.urls' from '/home/dev/.local/lib/python3.12/site-packages/djoser/urls/__init__.py'> (None:None) 'api/auth/'>
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dev/.local/lib/python3.12/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dev/.local/lib/python3.12/site-packages/django/core/handlers/base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dev/.local/lib/python3.12/site-packages/django/urls/resolvers.py", line 722, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <module 'auth.urls' from '/home/dev/backend/auth/urls.py'> (None:None) 'api/auth/'>], [<URLResolver <module 'djoser.urls' from '/home/dev/.local/lib/python3.12/site-packages/djoser/urls/__init__.py'> (None:None) 'api/auth/'>], [<URLResolver <module 'user.urls' from '/home/dev/backend/user/urls.py'> (None:None) 'api/'>], [<URLResolver <URLPattern list> (admin:admin) 'admin/'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 875, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 885, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <module 'user.urls' from '/home/dev/backend/user/urls.py'> (None:None) 'api/'>
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dev/.local/lib/python3.12/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dev/.local/lib/python3.12/site-packages/django/core/handlers/base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dev/.local/lib/python3.12/site-packages/django/urls/resolvers.py", line 722, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <module 'auth.urls' from '/home/dev/backend/auth/urls.py'> (None:None) 'api/auth/'>], [<URLResolver <module 'djoser.urls' from '/home/dev/.local/lib/python3.12/site-packages/djoser/urls/__init__.py'> (None:None) 'api/auth/'>], [<URLResolver <module 'user.urls' from '/home/dev/backend/user/urls.py'> (None:None) 'api/'>], [<URLResolver <URLPattern list> (admin:admin) 'admin/'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 875, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 885, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+(0.003) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2024-07-23T06:43:20.957336+00:00'::timestamptz AND "django_session"."session_key" = 'ze5owavogzrvdjvdq475mzojsf4r9pex') LIMIT 21; args=(datetime.datetime(2024, 7, 23, 6, 43, 20, 957336, tzinfo=datetime.timezone.utc), 'ze5owavogzrvdjvdq475mzojsf4r9pex'); alias=default
+(0.001) SELECT "user_useraccount"."id", "user_useraccount"."password", "user_useraccount"."last_login", "user_useraccount"."is_superuser", "user_useraccount"."uid", "user_useraccount"."number", "user_useraccount"."name", "user_useraccount"."updated_at", "user_useraccount"."created_at", "user_useraccount"."is_active", "user_useraccount"."is_manager", "user_useraccount"."is_staff" FROM "user_useraccount" WHERE "user_useraccount"."id" = 2 LIMIT 21; args=(2,); alias=default
+(0.007) SELECT COUNT(*) AS "__count" FROM "user_useraccount"; args=(); alias=default
+(0.001) SELECT COUNT(*) AS "__count" FROM "user_useraccount"; args=(); alias=default
+(0.002) SELECT "user_useraccount"."id", "user_useraccount"."password", "user_useraccount"."last_login", "user_useraccount"."is_superuser", "user_useraccount"."uid", "user_useraccount"."number", "user_useraccount"."name", "user_useraccount"."updated_at", "user_useraccount"."created_at", "user_useraccount"."is_active", "user_useraccount"."is_manager", "user_useraccount"."is_staff" FROM "user_useraccount" ORDER BY "user_useraccount"."updated_at" ASC, "user_useraccount"."id" DESC; args=(); alias=default
+Exception while resolving variable 'get_short_name' in template 'admin/change_list.html'.
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 875, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+  File "/home/dev/.local/lib/python3.12/site-packages/django/utils/functional.py", line 253, in inner
+    return func(_wrapped, *args)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'UserAccount' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 885, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dev/.local/lib/python3.12/site-packages/django/utils/functional.py", line 253, in inner
+    return func(_wrapped, *args)
+           ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'UserAccount' object has no attribute 'get_short_name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'get_short_name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [get_short_name] in <SimpleLazyObject: <UserAccount: >>
+(0.002) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2024-07-23T06:43:21.182870+00:00'::timestamptz AND "django_session"."session_key" = 'ze5owavogzrvdjvdq475mzojsf4r9pex') LIMIT 21; args=(datetime.datetime(2024, 7, 23, 6, 43, 21, 182870, tzinfo=datetime.timezone.utc), 'ze5owavogzrvdjvdq475mzojsf4r9pex'); alias=default
+(0.002) SELECT "user_useraccount"."id", "user_useraccount"."password", "user_useraccount"."last_login", "user_useraccount"."is_superuser", "user_useraccount"."uid", "user_useraccount"."number", "user_useraccount"."name", "user_useraccount"."updated_at", "user_useraccount"."created_at", "user_useraccount"."is_active", "user_useraccount"."is_manager", "user_useraccount"."is_staff" FROM "user_useraccount" WHERE "user_useraccount"."id" = 2 LIMIT 21; args=(2,); alias=default
+(0.003) SELECT 1 AS "a" FROM "user_useraccount" WHERE "user_useraccount"."number" = '012365' LIMIT 1; args=(1, '012365'); alias=default
+(0.001) BEGIN; args=None; alias=default
+(0.006) INSERT INTO "user_useraccount" ("password", "last_login", "is_superuser", "uid", "number", "name", "updated_at", "created_at", "is_active", "is_manager", "is_staff") VALUES ('pbkdf2_sha256$720000$OXCHVDU5YKyi5XPEsvtxJd$nJOZJScT7xt+OrSMqIhkuiGPqXZYNew8xUUERXoWaBo=', NULL, false, NULL, '012365', '', '2024-07-23T06:43:44.961463+00:00'::timestamptz, '2024-07-23T06:43:44.961481+00:00'::timestamptz, true, false, false) RETURNING "user_useraccount"."id"; args=('pbkdf2_sha256$720000$OXCHVDU5YKyi5XPEsvtxJd$nJOZJScT7xt+OrSMqIhkuiGPqXZYNew8xUUERXoWaBo=', None, False, None, '012365', '', datetime.datetime(2024, 7, 23, 6, 43, 44, 961463, tzinfo=datetime.timezone.utc), datetime.datetime(2024, 7, 23, 6, 43, 44, 961481, tzinfo=datetime.timezone.utc), True, False, False); alias=default
+(0.003) UPDATE "user_useraccount" SET "password" = 'pbkdf2_sha256$720000$OXCHVDU5YKyi5XPEsvtxJd$nJOZJScT7xt+OrSMqIhkuiGPqXZYNew8xUUERXoWaBo=', "last_login" = NULL, "is_superuser" = false, "uid" = 'pb8X2xqW', "number" = '012365', "name" = '', "updated_at" = '2024-07-23T06:43:44.970512+00:00'::timestamptz, "created_at" = '2024-07-23T06:43:44.961481+00:00'::timestamptz, "is_active" = true, "is_manager" = false, "is_staff" = false WHERE "user_useraccount"."id" = 38; args=('pbkdf2_sha256$720000$OXCHVDU5YKyi5XPEsvtxJd$nJOZJScT7xt+OrSMqIhkuiGPqXZYNew8xUUERXoWaBo=', False, 'pb8X2xqW', '012365', '', datetime.datetime(2024, 7, 23, 6, 43, 44, 970512, tzinfo=datetime.timezone.utc), datetime.datetime(2024, 7, 23, 6, 43, 44, 961481, tzinfo=datetime.timezone.utc), True, False, False, 38); alias=default
+(0.002) COMMIT; args=None; alias=default
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2024-07-23T06:43:49.828356+00:00'::timestamptz AND "django_session"."session_key" = 'ze5owavogzrvdjvdq475mzojsf4r9pex') LIMIT 21; args=(datetime.datetime(2024, 7, 23, 6, 43, 49, 828356, tzinfo=datetime.timezone.utc), 'ze5owavogzrvdjvdq475mzojsf4r9pex'); alias=default
+(0.001) SELECT "user_useraccount"."id", "user_useraccount"."password", "user_useraccount"."last_login", "user_useraccount"."is_superuser", "user_useraccount"."uid", "user_useraccount"."number", "user_useraccount"."name", "user_useraccount"."updated_at", "user_useraccount"."created_at", "user_useraccount"."is_active", "user_useraccount"."is_manager", "user_useraccount"."is_staff" FROM "user_useraccount" WHERE "user_useraccount"."id" = 2 LIMIT 21; args=(2,); alias=default
+(0.001) SELECT COUNT(*) AS "__count" FROM "user_useraccount"; args=(); alias=default
+(0.000) SELECT COUNT(*) AS "__count" FROM "user_useraccount"; args=(); alias=default
+(0.001) SELECT "user_useraccount"."id", "user_useraccount"."password", "user_useraccount"."last_login", "user_useraccount"."is_superuser", "user_useraccount"."uid", "user_useraccount"."number", "user_useraccount"."name", "user_useraccount"."updated_at", "user_useraccount"."created_at", "user_useraccount"."is_active", "user_useraccount"."is_manager", "user_useraccount"."is_staff" FROM "user_useraccount" ORDER BY "user_useraccount"."updated_at" ASC, "user_useraccount"."id" DESC; args=(); alias=default
+Exception while resolving variable 'get_short_name' in template 'admin/change_list.html'.
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 875, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+  File "/home/dev/.local/lib/python3.12/site-packages/django/utils/functional.py", line 253, in inner
+    return func(_wrapped, *args)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'UserAccount' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 885, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dev/.local/lib/python3.12/site-packages/django/utils/functional.py", line 253, in inner
+    return func(_wrapped, *args)
+           ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'UserAccount' object has no attribute 'get_short_name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'get_short_name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [get_short_name] in <SimpleLazyObject: <UserAccount: >>
+(0.003) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2024-07-23T06:43:49.906328+00:00'::timestamptz AND "django_session"."session_key" = 'ze5owavogzrvdjvdq475mzojsf4r9pex') LIMIT 21; args=(datetime.datetime(2024, 7, 23, 6, 43, 49, 906328, tzinfo=datetime.timezone.utc), 'ze5owavogzrvdjvdq475mzojsf4r9pex'); alias=default
+(0.001) SELECT "user_useraccount"."id", "user_useraccount"."password", "user_useraccount"."last_login", "user_useraccount"."is_superuser", "user_useraccount"."uid", "user_useraccount"."number", "user_useraccount"."name", "user_useraccount"."updated_at", "user_useraccount"."created_at", "user_useraccount"."is_active", "user_useraccount"."is_manager", "user_useraccount"."is_staff" FROM "user_useraccount" WHERE "user_useraccount"."id" = 2 LIMIT 21; args=(2,); alias=default
+(0.016) SELECT 1 AS "a" FROM "user_useraccount" WHERE "user_useraccount"."number" = '444555' LIMIT 1; args=(1, '444555'); alias=default
+(0.000) BEGIN; args=None; alias=default
+(0.011) INSERT INTO "user_useraccount" ("password", "last_login", "is_superuser", "uid", "number", "name", "updated_at", "created_at", "is_active", "is_manager", "is_staff") VALUES ('pbkdf2_sha256$720000$b5UWhSId7PXyseTXoQUiBw$UjWrIEaiEF9JFnIGR8ZeEM4o83gM9VAPNyMOXqK0tkI=', NULL, false, NULL, '444555', '', '2024-07-23T06:52:06.452090+00:00'::timestamptz, '2024-07-23T06:52:06.452325+00:00'::timestamptz, true, false, false) RETURNING "user_useraccount"."id"; args=('pbkdf2_sha256$720000$b5UWhSId7PXyseTXoQUiBw$UjWrIEaiEF9JFnIGR8ZeEM4o83gM9VAPNyMOXqK0tkI=', None, False, None, '444555', '', datetime.datetime(2024, 7, 23, 6, 52, 6, 452090, tzinfo=datetime.timezone.utc), datetime.datetime(2024, 7, 23, 6, 52, 6, 452325, tzinfo=datetime.timezone.utc), True, False, False); alias=default
+(0.005) UPDATE "user_useraccount" SET "password" = 'pbkdf2_sha256$720000$b5UWhSId7PXyseTXoQUiBw$UjWrIEaiEF9JFnIGR8ZeEM4o83gM9VAPNyMOXqK0tkI=', "last_login" = NULL, "is_superuser" = false, "uid" = 'o58wqxr2', "number" = '444555', "name" = '', "updated_at" = '2024-07-23T06:52:06.469379+00:00'::timestamptz, "created_at" = '2024-07-23T06:52:06.452325+00:00'::timestamptz, "is_active" = true, "is_manager" = false, "is_staff" = false WHERE "user_useraccount"."id" = 39; args=('pbkdf2_sha256$720000$b5UWhSId7PXyseTXoQUiBw$UjWrIEaiEF9JFnIGR8ZeEM4o83gM9VAPNyMOXqK0tkI=', False, 'o58wqxr2', '444555', '', datetime.datetime(2024, 7, 23, 6, 52, 6, 469379, tzinfo=datetime.timezone.utc), datetime.datetime(2024, 7, 23, 6, 52, 6, 452325, tzinfo=datetime.timezone.utc), True, False, False, 39); alias=default
+(0.004) COMMIT; args=None; alias=default
+(0.011) SELECT "user_useraccount"."id", "user_useraccount"."password", "user_useraccount"."last_login", "user_useraccount"."is_superuser", "user_useraccount"."uid", "user_useraccount"."number", "user_useraccount"."name", "user_useraccount"."updated_at", "user_useraccount"."created_at", "user_useraccount"."is_active", "user_useraccount"."is_manager", "user_useraccount"."is_staff" FROM "user_useraccount" WHERE "user_useraccount"."number" = '001212' LIMIT 21; args=('001212',); alias=default
+(0.018) INSERT INTO "token_blacklist_outstandingtoken" ("user_id", "jti", "token", "created_at", "expires_at") VALUES (4, 'e930483bc14c41d4b3b382b59da8ccf9', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyMTgwNDAzNSwiaWF0IjoxNzIxNzE3NjM1LCJqdGkiOiJlOTMwNDgzYmMxNGM0MWQ0YjNiMzgyYjU5ZGE4Y2NmOSIsInVzZXJfaWQiOiIwMDEyMTIifQ.VCkVAML_5hTtzGhrte0iASkUQTPACOAvgmUXqZjkMWY', '2024-07-23T06:53:55.467496+00:00'::timestamptz, '2024-07-24T06:53:55+00:00'::timestamptz) RETURNING "token_blacklist_outstandingtoken"."id"; args=(4, 'e930483bc14c41d4b3b382b59da8ccf9', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyMTgwNDAzNSwiaWF0IjoxNzIxNzE3NjM1LCJqdGkiOiJlOTMwNDgzYmMxNGM0MWQ0YjNiMzgyYjU5ZGE4Y2NmOSIsInVzZXJfaWQiOiIwMDEyMTIifQ.VCkVAML_5hTtzGhrte0iASkUQTPACOAvgmUXqZjkMWY', datetime.datetime(2024, 7, 23, 6, 53, 55, 467496, tzinfo=datetime.timezone.utc), datetime.datetime(2024, 7, 24, 6, 53, 55, tzinfo=datetime.timezone.utc)); alias=default
+Unauthorized: /api/auth/users/me/
+(0.007) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2024-07-23T06:56:53.092506+00:00'::timestamptz AND "django_session"."session_key" = 'ze5owavogzrvdjvdq475mzojsf4r9pex') LIMIT 21; args=(datetime.datetime(2024, 7, 23, 6, 56, 53, 92506, tzinfo=datetime.timezone.utc), 'ze5owavogzrvdjvdq475mzojsf4r9pex'); alias=default
+(0.002) SELECT "user_useraccount"."id", "user_useraccount"."password", "user_useraccount"."last_login", "user_useraccount"."is_superuser", "user_useraccount"."uid", "user_useraccount"."number", "user_useraccount"."name", "user_useraccount"."updated_at", "user_useraccount"."created_at", "user_useraccount"."is_active", "user_useraccount"."is_manager", "user_useraccount"."is_staff" FROM "user_useraccount" WHERE "user_useraccount"."id" = 2 LIMIT 21; args=(2,); alias=default
+(0.004) SELECT COUNT(*) AS "__count" FROM "user_useraccount"; args=(); alias=default
+(0.000) SELECT COUNT(*) AS "__count" FROM "user_useraccount"; args=(); alias=default
+(0.006) SELECT "user_useraccount"."id", "user_useraccount"."password", "user_useraccount"."last_login", "user_useraccount"."is_superuser", "user_useraccount"."uid", "user_useraccount"."number", "user_useraccount"."name", "user_useraccount"."updated_at", "user_useraccount"."created_at", "user_useraccount"."is_active", "user_useraccount"."is_manager", "user_useraccount"."is_staff" FROM "user_useraccount" ORDER BY "user_useraccount"."updated_at" ASC, "user_useraccount"."id" DESC; args=(); alias=default
+Exception while resolving variable 'get_short_name' in template 'admin/change_list.html'.
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 875, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+  File "/home/dev/.local/lib/python3.12/site-packages/django/utils/functional.py", line 253, in inner
+    return func(_wrapped, *args)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'UserAccount' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 885, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dev/.local/lib/python3.12/site-packages/django/utils/functional.py", line 253, in inner
+    return func(_wrapped, *args)
+           ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'UserAccount' object has no attribute 'get_short_name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'get_short_name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [get_short_name] in <SimpleLazyObject: <UserAccount: >>
+(0.003) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2024-07-23T06:56:53.495133+00:00'::timestamptz AND "django_session"."session_key" = 'ze5owavogzrvdjvdq475mzojsf4r9pex') LIMIT 21; args=(datetime.datetime(2024, 7, 23, 6, 56, 53, 495133, tzinfo=datetime.timezone.utc), 'ze5owavogzrvdjvdq475mzojsf4r9pex'); alias=default
+(0.001) SELECT "user_useraccount"."id", "user_useraccount"."password", "user_useraccount"."last_login", "user_useraccount"."is_superuser", "user_useraccount"."uid", "user_useraccount"."number", "user_useraccount"."name", "user_useraccount"."updated_at", "user_useraccount"."created_at", "user_useraccount"."is_active", "user_useraccount"."is_manager", "user_useraccount"."is_staff" FROM "user_useraccount" WHERE "user_useraccount"."id" = 2 LIMIT 21; args=(2,); alias=default
+(0.010) SELECT "user_useraccount"."id", "user_useraccount"."password", "user_useraccount"."last_login", "user_useraccount"."is_superuser", "user_useraccount"."uid", "user_useraccount"."number", "user_useraccount"."name", "user_useraccount"."updated_at", "user_useraccount"."created_at", "user_useraccount"."is_active", "user_useraccount"."is_manager", "user_useraccount"."is_staff" FROM "user_useraccount" WHERE "user_useraccount"."number" = '001212' LIMIT 21; args=('001212',); alias=default
+(0.012) INSERT INTO "token_blacklist_outstandingtoken" ("user_id", "jti", "token", "created_at", "expires_at") VALUES (4, '927336f59fd14e19adddee84c95fd553', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyMTgwNDQxNywiaWF0IjoxNzIxNzE4MDE3LCJqdGkiOiI5MjczMzZmNTlmZDE0ZTE5YWRkZGVlODRjOTVmZDU1MyIsInVzZXJfaWQiOiIwMDEyMTIifQ.QH73oEJo9gCJPQ0yVdI_84tw8T1PgRQwQ9ZMPcUGJOY', '2024-07-23T07:00:17.002296+00:00'::timestamptz, '2024-07-24T07:00:17+00:00'::timestamptz) RETURNING "token_blacklist_outstandingtoken"."id"; args=(4, '927336f59fd14e19adddee84c95fd553', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyMTgwNDQxNywiaWF0IjoxNzIxNzE4MDE3LCJqdGkiOiI5MjczMzZmNTlmZDE0ZTE5YWRkZGVlODRjOTVmZDU1MyIsInVzZXJfaWQiOiIwMDEyMTIifQ.QH73oEJo9gCJPQ0yVdI_84tw8T1PgRQwQ9ZMPcUGJOY', datetime.datetime(2024, 7, 23, 7, 0, 17, 2296, tzinfo=datetime.timezone.utc), datetime.datetime(2024, 7, 24, 7, 0, 17, tzinfo=datetime.timezone.utc)); alias=default
+Unauthorized: /api/auth/users/me/
+(0.024) SELECT "user_useraccount"."id", "user_useraccount"."password", "user_useraccount"."last_login", "user_useraccount"."is_superuser", "user_useraccount"."uid", "user_useraccount"."number", "user_useraccount"."name", "user_useraccount"."updated_at", "user_useraccount"."created_at", "user_useraccount"."is_active", "user_useraccount"."is_manager", "user_useraccount"."is_staff" FROM "user_useraccount" WHERE "user_useraccount"."number" = '001212' LIMIT 21; args=('001212',); alias=default
+(0.024) INSERT INTO "token_blacklist_outstandingtoken" ("user_id", "jti", "token", "created_at", "expires_at") VALUES (4, '0de0de354cc04f1ba62fec51670645a9', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyMTgwODEzNSwiaWF0IjoxNzIxNzIxNzM1LCJqdGkiOiIwZGUwZGUzNTRjYzA0ZjFiYTYyZmVjNTE2NzA2NDVhOSIsInVzZXJfaWQiOiIwMDEyMTIifQ.aPzMHnCGDaf7JcdAj_nJAUhDpwx0s_AY5g2DNplRHXE', '2024-07-23T08:02:15.184295+00:00'::timestamptz, '2024-07-24T08:02:15+00:00'::timestamptz) RETURNING "token_blacklist_outstandingtoken"."id"; args=(4, '0de0de354cc04f1ba62fec51670645a9', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyMTgwODEzNSwiaWF0IjoxNzIxNzIxNzM1LCJqdGkiOiIwZGUwZGUzNTRjYzA0ZjFiYTYyZmVjNTE2NzA2NDVhOSIsInVzZXJfaWQiOiIwMDEyMTIifQ.aPzMHnCGDaf7JcdAj_nJAUhDpwx0s_AY5g2DNplRHXE', datetime.datetime(2024, 7, 23, 8, 2, 15, 184295, tzinfo=datetime.timezone.utc), datetime.datetime(2024, 7, 24, 8, 2, 15, tzinfo=datetime.timezone.utc)); alias=default
+Unauthorized: /api/auth/users/me/
+(0.109) SELECT "user_useraccount"."id", "user_useraccount"."password", "user_useraccount"."last_login", "user_useraccount"."is_superuser", "user_useraccount"."uid", "user_useraccount"."number", "user_useraccount"."name", "user_useraccount"."updated_at", "user_useraccount"."created_at", "user_useraccount"."is_active", "user_useraccount"."is_manager", "user_useraccount"."is_staff" FROM "user_useraccount" WHERE "user_useraccount"."number" = '001212' LIMIT 21; args=('001212',); alias=default
+(0.618) INSERT INTO "token_blacklist_outstandingtoken" ("user_id", "jti", "token", "created_at", "expires_at") VALUES (4, '8a70acd46eba429dab1f084931144ff9', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyMTgwODE5NiwiaWF0IjoxNzIxNzIxNzk2LCJqdGkiOiI4YTcwYWNkNDZlYmE0MjlkYWIxZjA4NDkzMTE0NGZmOSIsInVzZXJfaWQiOiIwMDEyMTIifQ.9LJhrmhZa8zVHRScAdiSzziFsNzDuA_YaHYpqOLfGMo', '2024-07-23T08:03:16.597131+00:00'::timestamptz, '2024-07-24T08:03:16+00:00'::timestamptz) RETURNING "token_blacklist_outstandingtoken"."id"; args=(4, '8a70acd46eba429dab1f084931144ff9', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyMTgwODE5NiwiaWF0IjoxNzIxNzIxNzk2LCJqdGkiOiI4YTcwYWNkNDZlYmE0MjlkYWIxZjA4NDkzMTE0NGZmOSIsInVzZXJfaWQiOiIwMDEyMTIifQ.9LJhrmhZa8zVHRScAdiSzziFsNzDuA_YaHYpqOLfGMo', datetime.datetime(2024, 7, 23, 8, 3, 16, 597131, tzinfo=datetime.timezone.utc), datetime.datetime(2024, 7, 24, 8, 3, 16, tzinfo=datetime.timezone.utc)); alias=default
+Unauthorized: /api/auth/users/me/
+(0.071) SELECT "user_useraccount"."id", "user_useraccount"."password", "user_useraccount"."last_login", "user_useraccount"."is_superuser", "user_useraccount"."uid", "user_useraccount"."number", "user_useraccount"."name", "user_useraccount"."updated_at", "user_useraccount"."created_at", "user_useraccount"."is_active", "user_useraccount"."is_manager", "user_useraccount"."is_staff" FROM "user_useraccount" WHERE "user_useraccount"."number" = '001212' LIMIT 21; args=('001212',); alias=default
+(0.036) INSERT INTO "token_blacklist_outstandingtoken" ("user_id", "jti", "token", "created_at", "expires_at") VALUES (4, 'd43452fa69f5419ea894bf19e5d5f70d', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyMTgwODQwMCwiaWF0IjoxNzIxNzIyMDAwLCJqdGkiOiJkNDM0NTJmYTY5ZjU0MTllYTg5NGJmMTllNWQ1ZjcwZCIsInVzZXJfaWQiOiIwMDEyMTIifQ.gg1k_JCatwRzM_ycT_ZaWIOFRivOaFlkACY1lueOv10', '2024-07-23T08:06:40.943885+00:00'::timestamptz, '2024-07-24T08:06:40+00:00'::timestamptz) RETURNING "token_blacklist_outstandingtoken"."id"; args=(4, 'd43452fa69f5419ea894bf19e5d5f70d', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyMTgwODQwMCwiaWF0IjoxNzIxNzIyMDAwLCJqdGkiOiJkNDM0NTJmYTY5ZjU0MTllYTg5NGJmMTllNWQ1ZjcwZCIsInVzZXJfaWQiOiIwMDEyMTIifQ.gg1k_JCatwRzM_ycT_ZaWIOFRivOaFlkACY1lueOv10', datetime.datetime(2024, 7, 23, 8, 6, 40, 943885, tzinfo=datetime.timezone.utc), datetime.datetime(2024, 7, 24, 8, 6, 40, tzinfo=datetime.timezone.utc)); alias=default
+(0.006) SELECT "user_useraccount"."id", "user_useraccount"."password", "user_useraccount"."last_login", "user_useraccount"."is_superuser", "user_useraccount"."uid", "user_useraccount"."number", "user_useraccount"."name", "user_useraccount"."updated_at", "user_useraccount"."created_at", "user_useraccount"."is_active", "user_useraccount"."is_manager", "user_useraccount"."is_staff" FROM "user_useraccount" WHERE "user_useraccount"."number" = '001212' LIMIT 21; args=('001212',); alias=default
+Bad Request: /api/auth/users/me/
