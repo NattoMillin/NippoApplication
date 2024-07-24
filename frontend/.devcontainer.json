@@ -1,5 +1,6 @@
 {
   "name": "NextJS Container",
+<<<<<<< HEAD
   "dockerComposeFile": "../docker-compose.lol.yml",
   "workspaceFolder": "/home/node/dev",
   "service": "frontend",
